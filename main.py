@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
+from goodreads_credentials import goodreads_email, goodreads_password
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 scopes=[
@@ -20,9 +21,9 @@ sheet=sheet.sheet1
 
 driver.get('https://www.goodreads.com/ap/signin?language=en_US&openid.assoc_handle=amzn_goodreads_web_na&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.goodreads.com%2Fap-handler%2Fsign-in&siteState=fbf733bf4b9fe44eeabb707d4c0156a0')
 email_login=driver.find_element(By.ID,"ap_email")
-email_login.send_keys()
+email_login.send_keys(goodreads_email)
 password_login=driver.find_element(By.ID,"ap_password")
-password_login.send_keys()
+password_login.send_keys(goodreads_password)
 sign_in_button=driver.find_element(By.ID,"signInSubmit")
 sign_in_button.click()
 time.sleep(5)
